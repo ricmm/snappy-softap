@@ -1,0 +1,126 @@
+<html>
+<head>
+	<title> snappy Ubuntu Core - SHOW HOSTNAME </title>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery.validate.js"></script>
+	
+	<script type="text/javascript">
+		// create cookie
+		var cookie = Math.random().toString(36).substring(7);
+		var JSONObj = {"cookie":cookie};
+		//var JSONObj = {"cookie":"123456789"};
+		var jsonClient = JSON.stringify(JSONObj);
+		function executeQuery() {
+			console.log("in func");
+			$.ajax({
+		    		url: 'http://158.255.238.95/clients/get',
+    				type: 'post',
+	    			data: jsonClient,
+		    		dataType: 'json',
+			    	error: function(){setTimeout(executeQuery,1000);},
+				    success: function(data) {
+					console.log("in callback");
+					// do something with the return value here if you like
+					if ( data != "{}" ) {
+						$('#results').html("<br>The ip address of the host is: <b>" + data.ip + "</b><br><br>");
+					}
+			 		setTimeout(executeQuery, 1000);
+				}
+			});
+			console.log("out func");
+		}
+        $.fn.serializeObject = function()
+        {
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function() {
+                if (o[this.name] !== undefined) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        };
+		$(document).ready(function(){
+	/*
+            $.ajax({
+                url: '/scan',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    $.each(data.ssids, function(key, value) {
+                        console.log(value);
+                        $('#wlan_essid').append("<option value'" + value + "'>" + value + "</option>");
+                    });
+                }
+            });*/
+			// launch ip checker script
+			$("#form").validate({
+				debug: false,
+				rules: {
+					wifi_password: "required"
+				},
+				messages: {
+					wifi_password: "Please enter your password.",
+				},
+				submitHandler: function(form) {
+					// do other stuff for a valid form
+                    var jsonObj = $("#form").serializeObject();
+                    jsonObj['cookie'] = cookie;
+                    var jsonStr = JSON.stringify(jsonObj);
+                    console.log(jsonStr);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/connect/',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: 'json',
+                        data: jsonStr,
+                        success: function(data) {
+                            console.log(data);
+                            $('#results').html("Form submitted successfully: <br>Your wifi network is <b>" + data.wlan_essid + "</b> and your password is <b>" + data.wlan_password + "</b><br><br>Please wait 60-120 seconds until the device reboots. Connect your client to the select network in the meanwhile.<br><br>");
+						executeQuery();
+                        }
+                    });
+				}
+			});
+		});
+	</script>
+		
+</head>
+<body>
+<center>
+	<div id="main">
+		
+		<section>
+			<p>
+			Connect your Ubuntu Core system to the AP of your choice.<br/> After connecting, you will be informed of the IP address of the device.
+			</p>
+			<p class="dominant">step 1: enter your wireless network</p>
+			<div class="wifi_choice">
+			<form id="form" >
+				<input type="text" name="wlan_essid" value="ap essid">
+	
+				<p class="dominant">step 2: enter your password</p>
+				
+				<label for="wifi_password"></label>
+				<input 
+					class="unclicked"
+					type="text" 
+					name="wlan_password"
+					value="your wifi password"
+					onclick="if (this.value=='your wifi password'){ this.value=''; this.className=''}"
+				>
+				
+				<input type="submit" value="Submit">
+			</form>
+		</section>
+		<section id="results"></section>
+	</div>
+</body>
+</html>

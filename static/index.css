@@ -1,0 +1,101 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+html {
+	padding-bottom: 24px;
+	background-color: #CECAC5;
+}
+header {
+	background: url('img/horizontal_header_slice.png') repeat-x;
+	height: 25px;
+	width: 100%;
+}
+header h1 {
+	width: 756px;
+	height: 446px;
+	display: block;
+	background: url('img/NPI_header.png');
+}
+header h1 span {
+	visibility: none;
+}
+
+#main {
+	position: absolute;
+	top: 25px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #CECAC5;
+	font-family: 'Ubuntu', normal, sans-serif;
+	padding: 25px 0 55px 55px;
+	color: #ffffff;
+	line-height: 24px;
+}
+#main section {
+	background-color: #DD4814;
+	border-radius: 8px;
+	padding: 30px 10px 15px 10px;
+	width: 670px;
+	text-align: center;
+	margin-bottom: 24px;
+}
+#main section p {
+	font-size: 19px;
+	margin-bottom: 37px;
+}
+#main section p.dominant {
+	font-family: 'Ubuntu', normal, sans-serif;
+	font-size: 28px;
+	margin-bottom: 25px;
+}
+#main form {
+	display: block;
+	text-align: center;
+}
+#main form select {
+	display: block;
+	width: 280px;
+	height: 36px;
+	padding-left: 10px;
+	background: #fff;
+	border: 1px #3880a5 solid;
+	font-size: 17px;
+	margin: 0 auto 25px auto;
+}
+
+#main form input[type='text'] {
+	margin-bottom: 30px;
+	width: 280px;
+	height: 36px;
+	padding-left: 4px;
+	font-family: 'Ubuntu';
+	font-size: 18px;
+	color: #000;
+}
+#main form input.unclicked {
+	color: #888;
+}
+#main form input[type='submit'] {
+	display: block;
+	font-family: 'Ubuntu';
+	font-size: 21px;
+	color: #fff;
+	background: #772953;
+	height: 36px;
+	padding: 0 8px;
+	margin: 0 auto 25px auto;
+    	border:0 none;
+	cursor:pointer;
+	-webkit-border-radius: 5px;
+	border-radius: 5px; 
+}
+
+#main form input:hover {
+	text-decoration: underline;
+}
+label {
+	display: none;
+}
+label.error { text-align: center; display: block; color: red;}
