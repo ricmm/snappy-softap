@@ -1,28 +1,20 @@
 name: soft-ap
 version: 0.1
 config: usr/bin/config.py
+vendor: Ricardo Mendoza <ricardo.mendoza@canonical.com>
 
-apps:
+services:
   dnsmasq:
-    command: bin/dnsmasq.sh
-    daemon: simple
-    uses: [unconfined]
+    start: bin/dnsmasq.sh
+    security-template: unconfined
   hostapd:
-    command: bin/hostapd.sh
-    daemon: simple
-    uses: [unconfined]
+    start: bin/hostapd.sh
+    security-template: unconfined
   heartbeat:
-    command: bin/heartbeat.sh
-    daemon: simple
-    uses: [unconfined]
+    start: bin/heartbeat.sh
+    security-template: unconfined
   server:
-    command: bin/softap
-    daemon: simple
-    uses: [unconfined]
-
-uses:
-  unconfined:
-    type: migration-skill
+    start: bin/softap
     security-template: unconfined
 
 summary: Configurable SoftAP for Ubuntu Core

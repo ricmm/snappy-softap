@@ -48,7 +48,7 @@
             return o;
         };
 		$(document).ready(function(){
-	/*
+	
             $.ajax({
                 url: '/scan',
                 dataType: 'json',
@@ -59,7 +59,7 @@
                         $('#wlan_essid').append("<option value'" + value + "'>" + value + "</option>");
                     });
                 }
-            });*/
+            });
 			// launch ip checker script
 			$("#form").validate({
 				debug: false,
@@ -104,15 +104,9 @@
 			<p class="dominant">step 1: enter your wireless network</p>
 			<div class="wifi_choice">
 			<form id="form" >
-				<input
-                    class="unclicked"
-                    type="text"
-                    name="wlan_essid"
-                    value="your ap essid"
-                    onclick="if (this.value=='your ap essid'){ this.value=''; this.className=''}"
-                >
+                <select id="wlan_essid" name="wlan_essid">
+                </select>
 
-	
 				<p class="dominant">step 2: enter your password</p>
 				
 				<label for="wifi_password"></label>
