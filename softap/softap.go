@@ -28,6 +28,9 @@ func main() {
         time.Sleep(5*time.Second)
     }
 
+    // make sure there's no one still writing
+    time.Sleep(2*time.Second)
+
     out, _ := ioutil.ReadFile(os.Getenv("SNAP_APP_DATA_PATH") + "/interface")
     //cmd := "iw dev | grep Interface | awk '{print $2}'"
     //out, _ := exec.Command("/bin/bash", "-c", cmd).Output()
@@ -35,6 +38,8 @@ func main() {
     wlanInterface = strings.TrimSpace(wlanInterface)
     fmt.Printf("iface: '%s'\n", wlanInterface)
     //os.Remove(os.Getenv("SNAP_APP_DATA_PATH") + "/interface")
+
+    // TODO: website should still continue to show even if connected to a network, client reflect
 
     r.HandleFunc("/connect/", connectWifi).Methods("POST")
     r.HandleFunc("/scan/", scanWifi)
