@@ -23,7 +23,7 @@ func main() {
 
     r := mux.NewRouter().StrictSlash(true)
 
-    for _, err := os.Stat(os.Getenv("SNAP_APP_DATA_PATH") + "/interface"); err != nil; _, err = os.Stat(os.Getenv("SNAP_APP_DATA_PATH") + "/iface-in-use") {
+    for _, err := os.Stat(os.Getenv("SNAP_APP_DATA_PATH") + "/interface"); err != nil; _, err = os.Stat(os.Getenv("SNAP_APP_DATA_PATH") + "/interface") {
         fmt.Printf("err: %s, looping\n", err)
         time.Sleep(5*time.Second)
     }
