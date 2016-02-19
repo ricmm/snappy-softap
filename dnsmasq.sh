@@ -4,7 +4,7 @@ iface=$(iw dev | grep Interface | awk '{print $2}')
 
 echo $iface > $SNAP_APP_DATA_PATH/interface
 
-if [ -e $SNAP_DIR/cookie ]; then
+if [ -e $SNAP_APP_DATA_PATH/cookie ]; then
     exit 0
 fi
 
