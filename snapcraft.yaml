@@ -14,7 +14,7 @@ services:
     start: bin/heartbeat.sh
     security-template: unconfined
   server:
-    start: bin/softap
+    start: bin/softap.sh
     security-template: unconfined
 
 summary: Configurable SoftAP for Ubuntu Core
@@ -31,6 +31,7 @@ parts:
   softap-static:
     plugin: copy
     files:
+        softap.sh: bin/softap.sh
         dnsmasq.sh: bin/dnsmasq.sh
         hostapd.sh: bin/hostapd.sh
         heartbeat.sh: bin/heartbeat.sh
