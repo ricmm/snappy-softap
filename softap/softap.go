@@ -127,6 +127,8 @@ iface {{.WlanIface}} inet dhcp
         fmt.Printf("Unable to write iface file: %v", err)
     }
 
+    exec.Command("/bin/sync").Output()
+
     fmt.Printf("%s", fileOut.String())
 
     rebootCmd := "sleep 5 && /sbin/shutdown -r now"

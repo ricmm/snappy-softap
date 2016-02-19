@@ -3,6 +3,7 @@
 iface=$(iw dev | grep Interface | awk '{print $2}')
 
 echo $iface > $SNAP_APP_DATA_PATH/interface
+sync
 
 if [ -e $SNAP_APP_DATA_PATH/cookie ]; then
     exit 0
