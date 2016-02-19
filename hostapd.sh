@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -e $SNAP_DIR/cookie ]; then
+if [ -e $SNAP_APP_DATA_PATH/cookie ]; then
   exit 0
 fi
 
