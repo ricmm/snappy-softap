@@ -20,9 +20,9 @@ apps:
     daemon: simple
     uses: [unconfined]
 
-uses:
+plugs:
   unconfined:
-    type: migration-skill
+    interface: old-security
     security-template: unconfined
 
 summary: Configurable SoftAP for Ubuntu Core
