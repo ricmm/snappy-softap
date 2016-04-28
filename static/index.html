@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title> snappy Ubuntu Core - SHOW HOSTNAME </title>
+	<title>Ubuntu Core</title>
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet" type="text/css" href="index.css">
 	<script src="/js/jquery.min.js"></script>
@@ -10,7 +10,6 @@
 		// create cookie
 		var cookie = Math.random().toString(36).substring(7);
 		var JSONObj = {"cookie":cookie};
-		//var JSONObj = {"cookie":"123456789"};
 		var jsonClient = JSON.stringify(JSONObj);
 		function executeQuery() {
 			console.log("in func");
@@ -48,7 +47,7 @@
             return o;
         };
 		$(document).ready(function(){
-	/*
+	
             $.ajax({
                 url: '/scan',
                 dataType: 'json',
@@ -59,7 +58,7 @@
                         $('#wlan_essid').append("<option value'" + value + "'>" + value + "</option>");
                     });
                 }
-            });*/
+            });
 			// launch ip checker script
 			$("#form").validate({
 				debug: false,
@@ -83,7 +82,7 @@
                         data: jsonStr,
                         success: function(data) {
                             console.log(data);
-                            $('#results').html("Form submitted successfully: <br>Your wifi network is <b>" + data.wlan_essid + "</b> and your password is <b>" + data.wlan_password + "</b><br><br>Please wait 60-120 seconds until the device reboots. Connect your client to the select network in the meanwhile.<br><br>");
+                            $('#results').html("Form submitted successfully: <br>Your wifi network is <b>" + data.wlan_essid + "</b> and your password is <b>" + data.wlan_password + "</b><br><br>Please wait 60-120 seconds until the device reboots. Connect your client to the selected network in the meanwhile.<br><br>");
 						executeQuery();
                         }
                     });
@@ -104,15 +103,9 @@
 			<p class="dominant">step 1: enter your wireless network</p>
 			<div class="wifi_choice">
 			<form id="form" >
-				<input
-                    class="unclicked"
-                    type="text"
-                    name="wlan_essid"
-                    value="your ap essid"
-                    onclick="if (this.value=='your ap essid'){ this.value=''; this.className=''}"
-                >
+                <select id="wlan_essid" name="wlan_essid">
+                </select>
 
-	
 				<p class="dominant">step 2: enter your password</p>
 				
 				<label for="wifi_password"></label>

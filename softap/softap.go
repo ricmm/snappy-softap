@@ -23,7 +23,7 @@ func main() {
 
     r := mux.NewRouter().StrictSlash(true)
 
-    for _, err := os.Stat(os.Getenv("SNAP_APP_DATA_PATH") + "/interface"); err != nil; _, err = os.Stat(os.Getenv("SNAP_APP_DATA_PATH") + "/interface") {
+    for _, err := os.Stat(os.Getenv("SNAP_DATA") + "/interface"); err != nil; _, err = os.Stat(os.Getenv("SNAP_DATA") + "/interface") {
         fmt.Printf("err: %s, looping\n", err)
         time.Sleep(5*time.Second)
     }
@@ -31,7 +31,7 @@ func main() {
     // make sure there's no one still writing
     time.Sleep(2*time.Second)
 
-    out, _ := ioutil.ReadFile(os.Getenv("SNAP_APP_DATA_PATH") + "/interface")
+    out, _ := ioutil.ReadFile(os.Getenv("SNAP_DATA") + "/interface")
     //cmd := "iw dev | grep Interface | awk '{print $2}'"
     //out, _ := exec.Command("/bin/bash", "-c", cmd).Output()
     wlanInterface = string(out)
@@ -43,7 +43,7 @@ func main() {
 
     r.HandleFunc("/connect/", connectWifi).Methods("POST")
     r.HandleFunc("/scan/", scanWifi)
-    r.PathPrefix("/").Handler(http.FileServer(http.Dir(os.Getenv("SNAP_APP_PATH") + "/static/")))
+    r.PathPrefix("/").Handler(http.FileServer(http.Dir(os.Getenv("SNAP") + "/static/")))
 
     log.Fatal(http.ListenAndServe(":8888", r))
 }
@@ -60,9 +60,10 @@ type Credentials struct {
 
 func scanWifi(w http.ResponseWriter, r *http.Request) {
     cmd := "iwlist " + wlanInterface + " scan | grep ESSID"
-    fmt.Printf("cmd: %s", cmd)
+    fmt.Printf("cmd: %s\n", cmd)
     val, _ := exec.Command("/bin/bash", "-c", cmd).Output()
     out := string(val)
+    fmt.Println(out)
     aps := strings.Split(out, "ESSID")[1:]
     for i := range aps {
         aps[i] = strings.TrimSpace(aps[i])
@@ -123,7 +124,7 @@ iface {{.WlanIface}} inet dhcp
     }
 
     // write cookie file
-    if err := ioutil.WriteFile(os.Getenv("SNAP_APP_DATA_PATH") + "/cookie", []byte(creds.Cookie), 0644); err != nil {
+    if err := ioutil.WriteFile(os.Getenv("SNAP_DATA") + "/cookie", []byte(creds.Cookie), 0644); err != nil {
         fmt.Printf("Unable to write iface file: %v", err)
     }
 

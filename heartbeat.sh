@@ -1,11 +1,11 @@
 #!/bin/bash
 
-if [ ! -e $SNAP_APP_DATA_PATH/cookie ]; then
+if [ ! -e $SNAP_DATA/cookie ]; then
   exit 0
 fi
 
-interface=`cat $SNAP_APP_DATA_PATH/interface`
-cookie=`cat $SNAP_APP_DATA_PATH/cookie`
+interface=`cat $SNAP_DATA/interface`
+cookie=`cat $SNAP_DATA/cookie`
 
 i=0
 while [ $i -lt 180 ]; do
@@ -16,5 +16,5 @@ while [ $i -lt 180 ]; do
 	sleep 1
 done
 
-rm $SNAP_APP_DATA_PATH/cookie
-rm $SNAP_APP_DATA_PATH/interface
+rm $SNAP_DATA/cookie
+rm $SNAP_DATA/interface

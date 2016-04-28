@@ -39,7 +39,7 @@ def save_shell_source(config_fd, creds):
 
 
 if __name__ == '__main__':
-    config_file = os.path.join(os.environ['SNAP_APP_DATA_PATH'], CONFIG_FILENAME)
+    config_file = os.path.join(os.environ['SNAP_DATA'], CONFIG_FILENAME)
 
     config_yaml = yaml.load(sys.stdin)
     if config_yaml:

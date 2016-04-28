@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -e $SNAP_APP_DATA_PATH/cookie ]; then
+if [ -e $SNAP_DATA/cookie ]; then
   exit 0
 fi
 
@@ -23,10 +23,10 @@ iptables --append FORWARD --in-interface uap0 -j ACCEPT
 sysctl -w net.ipv4.ip_forward=1
 
 #copy conf file in place
-if [ ! -e $SNAP_APP_DATA_PATH/hostapd.conf ] 
+if [ ! -e $SNAP_DATA/hostapd.conf ] 
 then
-  cp $SNAP_APP_PATH/hostapd.conf $SNAP_APP_DATA_PATH/hostapd.conf
+  cp $SNAP/hostapd.conf $SNAP_DATA/hostapd.conf
 fi
 
 #start hostapd
-exec $SNAP_APP_PATH/usr/sbin/hostapd $SNAP_APP_DATA_PATH/hostapd.conf
+exec $SNAP/usr/sbin/hostapd $SNAP_DATA/hostapd.conf
