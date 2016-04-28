@@ -5,6 +5,11 @@ iface=$(iw dev | grep Interface | awk '{print $2}')
 echo $iface > $SNAP_APP_DATA_PATH/interface
 sync
 
+# if interface is managed by ifupdown, exit
+if [ -e /etc/network/interfaces.d/$iface ]; then
+    exit 0
+fi
+
 if [ -e $SNAP_APP_DATA_PATH/cookie ]; then
     exit 0
 fi

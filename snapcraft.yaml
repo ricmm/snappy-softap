@@ -1,11 +1,12 @@
 name: soft-ap
-version: 0.1
+version: 1.0
 config: usr/bin/config.py
 vendor: Ricardo Mendoza <ricardo.mendoza@canonical.com>
 
 services:
   dnsmasq:
     start: bin/dnsmasq.sh
+    stop: bin/stop-iface.sh
     security-template: unconfined
   hostapd:
     start: bin/hostapd.sh
@@ -33,6 +34,7 @@ parts:
     files:
         softap.sh: bin/softap.sh
         dnsmasq.sh: bin/dnsmasq.sh
+        stop-iface.sh: bin/stop-iface.sh
         hostapd.sh: bin/hostapd.sh
         heartbeat.sh: bin/heartbeat.sh
         dnsmasq.conf: dnsmasq.conf

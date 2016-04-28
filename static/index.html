@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title> snappy Ubuntu Core - SHOW HOSTNAME </title>
+	<title>Ubuntu Core</title>
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet" type="text/css" href="index.css">
 	<script src="/js/jquery.min.js"></script>
@@ -10,7 +10,6 @@
 		// create cookie
 		var cookie = Math.random().toString(36).substring(7);
 		var JSONObj = {"cookie":cookie};
-		//var JSONObj = {"cookie":"123456789"};
 		var jsonClient = JSON.stringify(JSONObj);
 		function executeQuery() {
 			console.log("in func");
@@ -83,7 +82,7 @@
                         data: jsonStr,
                         success: function(data) {
                             console.log(data);
-                            $('#results').html("Form submitted successfully: <br>Your wifi network is <b>" + data.wlan_essid + "</b> and your password is <b>" + data.wlan_password + "</b><br><br>Please wait 60-120 seconds until the device reboots. Connect your client to the select network in the meanwhile.<br><br>");
+                            $('#results').html("Form submitted successfully: <br>Your wifi network is <b>" + data.wlan_essid + "</b> and your password is <b>" + data.wlan_password + "</b><br><br>Please wait 60-120 seconds until the device reboots. Connect your client to the selected network in the meanwhile.<br><br>");
 						executeQuery();
                         }
                     });

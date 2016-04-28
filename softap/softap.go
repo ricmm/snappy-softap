@@ -60,9 +60,10 @@ type Credentials struct {
 
 func scanWifi(w http.ResponseWriter, r *http.Request) {
     cmd := "iwlist " + wlanInterface + " scan | grep ESSID"
-    fmt.Printf("cmd: %s", cmd)
+    fmt.Printf("cmd: %s\n", cmd)
     val, _ := exec.Command("/bin/bash", "-c", cmd).Output()
     out := string(val)
+    fmt.Println(out)
     aps := strings.Split(out, "ESSID")[1:]
     for i := range aps {
         aps[i] = strings.TrimSpace(aps[i])
